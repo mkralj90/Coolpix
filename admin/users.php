@@ -1,6 +1,6 @@
 <?php include("includes/header.php"); ?>
 <?php if(!$session->is_signed_in()) {redirect("login.php");} ?>
-
+<?php $user = User::find_by_id($_SESSION['user_id']); if($user->user_role != "admin") {redirect("index.php");} ?>
 
 <?php $users = User::find_all(); ?>
 
@@ -83,13 +83,11 @@
                 <td><?php echo $user->id; ?></td>
                 <td><img width="100px" class="admin-user-thumbnail" src="<?php   echo $user->image_path_and_placeholder(); ?>" alt=""> </td>
                 <td><?php echo $user->username; ?>
-            
                 <div class="actions_link">
                 <a class="btn btn-danger delete_link"  href="delete_user.php?id=<?php echo $user->id;?>">Delete</a>
                 <a class="btn btn-primary" href="edit_user.php?id=<?php echo $user->id;?>">Edit</a>
                 <a class="btn btn-primary" href="view_user.php?id=<?php echo $user->id;?>">View User</a>
                 </div>
-            
             </td>
                 
                 <td><?php echo $user->first_name; ?></td>

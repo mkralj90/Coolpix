@@ -25,10 +25,6 @@
         </nav>
 
 
-
-
-
-
         <div id="page-wrapper">
 
         <div class="container-fluid">
@@ -43,13 +39,6 @@
         <p class="bg-success"><?php echo $message; ?></p>
         
     <div class="col-md-12">
-    <?php 
-    
-    
-    
-    
-    
-    ?>
 
     <table class="table table-hover">
     
@@ -81,9 +70,41 @@
             
                 <div class="actions_link">
                 
-                <a class="delete_link" href="delete_comment.php?id=<?php echo $comment->id;?>">Delete</a>
-                <a href="edit_comment.php?id=<?php echo $comment->id;?>">Edit</a>
-                
+                <a class="btn btn-danger delete_link" href="delete_comment.php?id=<?php echo $comment->id;?>">Delete</a>
+                    <!-- Button trigger Loginmodal -->
+                    <?php if($session->is_signed_in()) : ?>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#commentmodal">
+                            Edit
+                        </button>
+                    <?php endif; ?>
+
+                    <!--Edit comment Modal-->
+
+                    <div class="modal fade" id="commentmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form  action="" method="post" accept-charset="UTF-8" class="modal-login-form">
+                                        <div class="form-group">
+                                            <input name="username" placeholder="username" type="text" class="form-control">
+                                        </div>
+                                        <div class="from-group">
+                                            <input name="password" placeholder="password" type="password" class="form-control">
+                                        </div>
+                                        <button class="btn btn-primary btn-sm"  name="submit">Submit</button>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end login modal-->
                 
                 </div>
             

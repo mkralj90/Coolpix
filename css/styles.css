@@ -1,25 +1,201 @@
-
-
-.home_page_photo{
-
-width: 200px !important;
-height: 100px !important;
-
+@charset "UTF-8";
+body {
+  background: #f3e8ee;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+.not-signed-in {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 50%;
+}
+
+a:link {
+  text-decoration: none;
+  color: #fff;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #fff;
+}
+
+.home_page_photo {
+  width: 300px !important;
+  height: 200px !important;
+}
+
+.mainnav {
+  position: absolute;
+  top: 0;
+  height: 8%;
+  width: 100vw;
+}
+
+/* Top right div CSS  */
+.top-right {
+  position: absolute;
+  top: 25%;
+  left: 85%;
+}
+
+.drop1 {
+  width: 300px !important;
+  height: 400px !important;
+}
+
+.btnmodallog {
+  position: absolute;
+  top: 0;
+  left: -70%;
+}
+
+.modal-login-form input {
+  margin: 10px;
+}
+
+.modal-login-form button {
+  position: relative;
+  left: 2%;
+}
+
+.dropdowncontaoner {
+  width: 200px !important;
+  height: 400px !important;
+}
+
+/* end of top right div CSS */
+.pictures {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%);
+  background: #f3e8ee;
+}
 
 /* HOME PAGE PAGINATION */
-
-.pager .active a{
-
-background-color: #007BFF !important;
-color: #fff !important;
-
+.pager {
+  background-color: #007BFF !important;
+  color: #fff !important;
 }
 
-.pager li a:hover{
-
-    background-color: #007BFF !important;
-    color: #fff !important;
-
+.pager li a:hover {
+  background-color: #007BFF !important;
+  color: #fff !important;
 }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+.column {
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+
+.home {
+  position: absolute;
+  left: 0;
+  top: -5%;
+  margin: 10px;
+}
+
+.about {
+  position: absolute;
+  left: 10%;
+  top: 10%;
+  width: 80px;
+  height: 50px;
+  margin: 10px;
+  background: black;
+  border-radius: 20px;
+  color: white !important;
+  text-align: center;
+  align-content: center;
+}
+
+.about p {
+  position: relative;
+  top: 11%;
+}
+
+.home1 {
+  position: absolute;
+  left: 5%;
+  top: 10%;
+  width: 80px;
+  height: 50px;
+  margin: 10px;
+  background: black;
+  border-radius: 20px;
+  color: white !important;
+  text-align: center;
+  align-content: center;
+}
+
+.home1 p {
+  position: relative;
+  top: 11%;
+}
+
+.links {
+  position: absolute;
+  left: 25%;
+  top: -5%;
+}
+
+.links li {
+  margin: 10px;
+}
+
+footer {
+  position: absolute;
+  left: 90%;
+  top: 99%;
+  /*input*/
+}
+footer .input-requirements {
+  font-size: 1rem;
+  text-align: left;
+  list-style: disc;
+  list-style-position: inside;
+  max-width: 400px;
+  margin: 10px auto;
+  color: #969696;
+}
+footer .input-requirements li.invalid {
+  color: #e74c3c;
+}
+footer .input-requirements li.valid {
+  color: #2ecc71;
+}
+footer .input-requirements li.valid:after {
+  display: inline-block;
+  padding-left: 10px;
+  content: "✓";
+}
+footer input:not([type=submit]):valid {
+  border-color: green;
+}
+footer input:not([type=submit]) + .input-requirements {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 1s ease-out;
+}
+footer input:not([type=submit]):hover + .input-requirements,
+footer input:not([type=submit]):focus + .input-requirements,
+footer input:not([type=submit]):active + .input-requirements {
+  max-height: 1000px;
+  transition: max-height 1s ease-in;
+}
+
+/*# sourceMappingURL=styles.css.map */

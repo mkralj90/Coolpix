@@ -1,0 +1,22 @@
+{
+  "name": "gallery",
+  "version": "1.0.0",
+  "description": "Gallery System created for my CV",
+  "main": "index.js",
+  "scripts": {
+    "compile_sass": "node-sass css/styles.sass css/styles.css -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkralj90/Gallery-System.git"
+  },
+  "author": "Miha Kralj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mkralj90/Gallery-System/issues"
+  },
+  "homepage": "https://github.com/mkralj90/Gallery-System#readme",
+  "devDependencies": {
+    "node-sass": "^6.0.0"
+  }
+}

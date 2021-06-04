@@ -3,7 +3,7 @@
     class Comment extends DB_Object{
 
     protected static $db_table = "comments";
-    protected static $db_table_fields = array('photo_id', 'author', 'body', 'comment_date');
+    protected static $db_table_fields = array('photo_id', 'author', 'body', 'NOW()');
     
     public $id;
     public $photo_id;

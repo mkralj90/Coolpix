@@ -3,7 +3,7 @@
 class User extends DB_Object{
 
 protected static $db_table = "users";
-protected static $db_table_fields = array('username', 'user_image', 'password', 'first_name', 'last_name');
+protected static $db_table_fields = array('username', 'user_image', 'password', 'first_name', 'last_name', 'user_role', 'NOW()');
 
 public $id;
 public $username;
@@ -11,7 +11,8 @@ public $user_image;
 public $password;
 public $first_name;
 public $last_name;
-public $post_count;
+public $user_role;
+public $date_created;
 public $upload_directory = "images";
 public $image_placeholder = "http://placehold.it/400x400&text=image";
 public $tmp_path;
@@ -126,7 +127,7 @@ public function set_file($file) {
     
         
     
-        } // end of save
+        } // end of upload_photo
 /* ---------------------------------------------------------------------------- */
 
  

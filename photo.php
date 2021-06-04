@@ -3,7 +3,6 @@
 <?php
 /* ---------------------------------------------------------------------------- */
 
-date_default_timezone_set('GMT+1');
 require_once("admin/includes/init.php");
 
 
@@ -17,13 +16,13 @@ redirect("index.php");
 
 }
 
-if(isset($_POST['submit'])){
+if(isset($_POST['comment'])){
 
 $author = trim($_POST['author']);
 $body = trim($_POST['body']);
 $comment_date = date('d-m-y H:i:s');
 
-$new_comment = Comment::create_comment($photo->id, $author, $body);
+$new_comment = Comment::create_comment($photo->id, $author, $body ,$comment_date);
 
 if($new_comment && $new_comment->save()){
 
@@ -97,14 +96,14 @@ $comments = Comment::find_the_comments($photo->id);
                     <form role="form" method="post">
                     <div class="form-group">
                     <label for="">Author</label>
-                    <input type="text" name="author" class="form-control" value="<?php 
+                    <input type="text" name="author" class="form-control" hidden value="<?php
                     $user = User::find_by_id($_SESSION['user_id']);
                     echo $user->username ?>">
                     </div>
                             <label for="">Comment</label>
                             <textarea class="form-control" rows="3" name="body"></textarea>
                         </div>
-                        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" name="comment" class="btn btn-primary">Submit</button>
                     </form>
                 
                 <hr>
