@@ -1,7 +1,6 @@
 <?php ob_start(); ?>
 <?php include("includes/header.php"); ?>
 
-
 <?php
 /* ---------------------------------------------------------------------------- */
 
@@ -29,76 +28,7 @@ $photos = Photo::find_by_query($sql);
 ?>
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Register New User</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
 
-                <form>
-                    <div class="mb-3">
-                        <label for="username1"> Username
-                            <input placeholder="username" id="username1" type="text" name="username" class="form-control" minlength="3" required>
-                            <ul class="input-requirements">
-                                <li class="list-group-item">At least 3 characters long</li>
-                                <li class="list-group-item">Must only contain letters and numbers (no special characters)</li>
-                            </ul>
-                        </label>
-                    </div><div class="mb-3">
-                        <label> First Name
-                            <input placeholder="first name" type="text" name="first_name" class="form-control" required>
-                        </label>
-                    </div><div class="mb-3">
-                        <label> Last Name
-                            <input placeholder="Last Name" type="text" name="last_name" class="form-control" required>
-                        </label>
-                    </div><div class="mb-3">
-                        <label> Email
-                            <input placeholder="Email" type="email" name="email" class="form-control" required>
-                            <ul class="input-requirements">
-                                <li class="list-group-item">Enter a valid Email</li>
-                            </ul>
-                        </label>
-                    </div><div class="mb-3">
-                        <label> Password
-                            <input placeholder="Password"
-                                   type="password"
-                                   id="password1"
-                                   name="password"
-                                   class="form-control" maxlength="100" minlength="8" required>
-                            <ul class="input-requirements">
-                                <li class="list-group-item">At least 8 characters long (and less than 100 characters)</li>
-                                <li class="list-group-item">Contains at least 1 number</li>
-                                <li class="list-group-item">Contains at least 1 lowercase letter</li>
-                                <li class="list-group-item">Contains at least 1 uppercase letter</li>
-                                <li class="list-group-item">Contains a special character (e.g. @ !)</li>
-                            </ul>
-                        </label>
-                    </div><div class="mb-3">
-                        <label> Confirm password
-                            <input placeholder="Confirm password" type="password" id="password2" name="confirm_password" class="form-control">
-                        </label>
-                    </div><div class="mb-3">
-                        <label> User Picture
-                            <input type="file" name="file" class="form-control">
-                        </label>
-                    </div>
-                    <input type="text" placeholder="is_admin" name="is_admin" hidden value="no">
-                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-                </form>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!--end of modal-->
 
    <div class="pictures row">
      
@@ -106,9 +36,9 @@ $photos = Photo::find_by_query($sql);
        <div class="col-md-12">
        
        <div class="row">
-       <?php
 
-   foreach($photos as $photo) : ?>
+       <?php if($session->is_signed_in()) : ?>
+       <?php foreach($photos as $photo) : ?>
 
    
    
@@ -145,9 +75,7 @@ $photos = Photo::find_by_query($sql);
 
   echo  "<li class='next page-item'><a class='page-link' href='index.php?page={$paginate->next()}'>Next</a></li>";
 
-
   }
-
 
   for($i=1; $i <= $paginate->page_total(); $i++){
 
@@ -155,35 +83,23 @@ $photos = Photo::find_by_query($sql);
 
   echo  "<li class='active page-item'><a class='page-link' href='index.php?page={$i}'>{$i}</a></li>";
 
-
   } else{
-
 
   echo  "<li class='page-item'><a class='page-link' href='index.php?page={$i}'>{$i}</a></li>";
 
-
   }
 
   }
-
-
-      
-
 
   if($paginate->has_previous()){
 
     echo  "<li class='previous page-item'><a class='page-link' href='index.php?page={$paginate->previous()}'>Previous</a></li>";
 
+  }
 
   }
 
 
-  }
-
-     
-
-
-     
 /* ---------------------------------------------------------------------------- */
 
      ?>
@@ -192,7 +108,8 @@ $photos = Photo::find_by_query($sql);
 
        </nav>
 
-  
+  <?php  endif; ?>
+  <?php if(!$session->is_signed_in()){ echo "<div class='alert alert-danger'>You must register or login to see content !!</div>";} ?>
   </div>
 
        <!-- Blog Sidebar Widgets Column -->

@@ -1,5 +1,6 @@
 <?php include("includes/header.php"); ?>
 <?php if(!$session->is_signed_in()) {redirect("login.php");} ?>
+<?php $user = User::find_by_id($_SESSION['user_id']); if($user->user_role == "subscriber") {redirect("index.php");} ?>
 
 
 <?php $comments = Comment::find_all(); ?>

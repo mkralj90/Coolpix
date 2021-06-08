@@ -15,7 +15,7 @@
                         <a href="users.php"><i class="fa fa-fw fa-users"></i> Users</a>
                     </li>
                     <?php endif; ?>
-                    <?php if($user->user_role == "moderator") : ?>
+                    <?php if($user->user_role == "admin" || $user->user_role == "moderator") : ?>
                     <li>
                         <a href="photos.php"><i class="fa fa-fw fa-photo"></i> Photos</a>
                     </li>

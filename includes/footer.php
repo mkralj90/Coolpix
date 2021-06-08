@@ -4,9 +4,7 @@
         <!-- Footer -->
         <footer>
             <div class="footer row">
-                <div class="col-lg-12">
-                    <p class="text-center">Copyright &copy; Invictus Design 2021</p>
-                </div>
+
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->

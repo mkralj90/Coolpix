@@ -1,6 +1,6 @@
 <?php include("includes/header.php"); ?>
 <?php if(!$session->is_signed_in()) {redirect("login.php");} ?>
-
+<?php $user = User::find_by_id($_SESSION['user_id']); ?>
 
 <?php $photos = Photo::find_all();  ?>
 
@@ -109,11 +109,11 @@ $photos = Photo::find_by_query($sql);
                 <td><img width="200px" class="admin-photo-thumbnail" src="<?php echo $photo->picture_path(); ?>" alt="">
                 
                 <div class="action_link">
-                
+                <?php if($user->user_role == "admin" || $user->user_role == "moderator") : ?>
                 <a class="btn btn-danger delete_link" href="delete_photo.php?id=<?php echo $photo->id;?>">Delete</a>
                 <a class="btn btn-primary" href="edit_photos.php?id=<?php echo $photo->id;?>&page=1">Edit</a>
                 <a class="btn btn-primary" href="../photo.php?id=<?php echo $photo->id;?>">View</a>
-                
+                <?php endif; ?>
                 
                 </div>
                 

@@ -84,9 +84,12 @@
                 <td><img width="100px" class="admin-user-thumbnail" src="<?php   echo $user->image_path_and_placeholder(); ?>" alt=""> </td>
                 <td><?php echo $user->username; ?>
                 <div class="actions_link">
+            <?php if($user->user_role == "admin" ) : ?>
+
                 <a class="btn btn-danger delete_link"  href="delete_user.php?id=<?php echo $user->id;?>">Delete</a>
                 <a class="btn btn-primary" href="edit_user.php?id=<?php echo $user->id;?>">Edit</a>
                 <a class="btn btn-primary" href="view_user.php?id=<?php echo $user->id;?>">View User</a>
+            <?php endif; ?>
                 </div>
             </td>
                 

@@ -1,3 +1,6 @@
+<?php $user = User::find_by_id($_SESSION['user_id']); ?>
+
+
 <div class="container-fluid">
 
 <!-- Page Heading -->
@@ -7,7 +10,7 @@
          Admin
          <small>Website Activity</small>
      </h1>
-
+    <?php if($user->user_role == "admin" || $user->user_role == "moderator") : ?>
 	        <!-- New Views -->
      <div class="row">
  <div class="col-lg-3 col-md-6">
@@ -77,6 +80,7 @@
          </div>
          <a href="users.php">
              <div class="panel-footer">
+                 <?php if($user->user_role != "admin"){ echo "<div class='alert alert-danger'>You do not have access !!</div>";} ?>
                  <span class="pull-left">Total Users</span>
                  <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                  <div class="clearfix"></div>
@@ -116,7 +120,7 @@
    <!-- website activity -->
 <div id="piechart" class="col-xs-6 col-md-12 col-xs-offset-0 col-xs-pull-5 col-sm-pull-0 col-md-pull-0 " style="width: 900px; height: 500px;"></div>
 
-
+<?php endif; ?>
  </div>
 </div>
 <!-- /.row -->
