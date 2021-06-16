@@ -1,10 +1,10 @@
-<?php require_once("includes/header.php"); ?>
+<?php require_once("includes/admin_header.php"); ?>
 
 
 <?php
 
 $session->logout();
-redirect("login.php");
+redirect("../index.php");
 
 
 ?>

@@ -14,7 +14,7 @@ class Photo extends DB_Object{
     public $alternate_text;
     public $type;
     public $size;
-    public $upload_date;   
+    public $upload_date;
 
     public $tmp_path;
     public $upload_directory = "images";

@@ -18,9 +18,12 @@
             if($user){
 
             $user->username = $_POST['username'];
+            $user->email = $_POST['email'];
             $user->password =$_POST['password'];
             $user->first_name =$_POST['first_name'];
             $user->last_name =$_POST['last_name'];
+            $user->date_created = date('d-m-Y H:i:s');
+            $user->user_role =$_POST['user_role'];
             $user->set_file($_FILES['user_image']);
             $user->upload_photo();
             $user->save();
@@ -33,7 +36,11 @@
             
 
 
-        }
+        }else{
+                redirect("users.php");
+                $session->message("Something went wrong");
+
+            }
 
 
         
@@ -95,6 +102,12 @@
     <input type="text" name="username" class="form-control" >
     
     </div>
+        <div class="form-group">
+
+    <label for="">Email</label>
+    <input type="email" name="email" class="form-control" >
+
+    </div>
  
   
 
@@ -103,6 +116,12 @@
     <label for="">Password</label>
     <input type="password" name="password" class="form-control">
     
+    </div>
+        <div class="form-group">
+
+    <label for="">Confirm Password</label>
+    <input type="password" name="confirmpassword" class="form-control">
+
     </div>
    
     <div class="form-group">
@@ -118,6 +137,7 @@
     <input type="text" name="last_name" class="form-control" >
     
     </div>
+        <input name="user_role" type="text" value="subscriber" hidden>
     <div class="form-group">
 
     <input type="submit" name="create" class="btn btn-primary pull-right" >

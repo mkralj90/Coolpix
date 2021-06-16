@@ -1,6 +1,5 @@
+<!--Login-->
 <?php
-
-
 if(isset($_POST['submit'])){
 
     $username =trim($_POST['username']);
@@ -15,28 +14,87 @@ if(isset($_POST['submit'])){
 
     }else{
 
-        $the_message = "Your password or username are incorrect !!!";
+        $session->message("Your password or username are incorrect !!!");
 
     }
 
 } else{
 
-    $the_message = "";
+    $message = "";
     $username = "";
     $password = "";
+    $email = "";
 
 }
 
-
 ?>
+<!--end login-->
+<!--***********************************************************************************-->
+<!--Register-->
+<?php
+
+$user = new User();
 
 
+if (isset($_POST['create'])) {
+
+/*FORM confirmation*/
+$formOK = true;
+
+if(empty($_POST['username'])){
+    $message = "<div class='alert alert-danger'>Username is required !!</div>";
+    $formOK = false;
+}
+if(empty($_POST['email'])){
+    $message = "<div class='alert alert-danger'>Email is required !!</div>";
+    $formOK = false;
+}
+if($_POST['password'] != $_POST['confirm_password']){
+    $message = "<div class='alert alert-danger'>Passwords do not match !!</div>";
+    $formOK = false;
+}
+
+
+if($formOK == true) {
+/*end confirmation*/
+
+        if ($user) {
+
+            $user->username = $_POST['username'];
+            $user->email = $_POST['email'];
+            $user->password = $_POST['password'];
+            $user->confirm_password = $_POST['confirm_password'];
+            $user->first_name = $_POST['first_name'];
+            $user->last_name = $_POST['last_name'];
+            $user->date_created = date('d-m-Y H:i:s');
+            $user->user_role = $_POST['user_role'];
+            $user->set_file($_FILES['user_image']);
+            $user->upload_photo();
+            $user->save();
+
+
+            redirect("index.php?item_per_page");
+            $session->message("<div class='alert alert-success'>The user {$user->username} has been created</div> The user {$user->username} has been created");
+
+
+        } else {
+            redirect("index.php?item_per_page");
+            $session->message("<div class='alert alert-danger'> Something went wrong</div>");
+
+        }
+
+
+    }
+}
+?>
+<!--end register-->
+<!--***************************************************************************************-->
 <nav class="mainnav navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="home navbar-brand" href="index.php"><img width="80px" src="css/images/Logo/logo_transparent.png" alt=""> </a>
-                <a class="home1 navbar-brand" href="index.php"><p>Home</p></a>
+                <a class="home navbar-brand" href="index.php?page=1&item_per_page"><img width="80px" src="css/images/Logo/logo_transparent.png" alt=""> </a>
+                <a class="home1 navbar-brand" href="index.php?page=1&item_per_page"><p>Home</p></a>
                 <a class="about navbar-brand" href="index.php"><p>About</p></a>
 
             </div>
@@ -84,7 +142,7 @@ if(isset($_POST['submit'])){
                     </div>
                     <div class="modal-body">
 
-                        <form>
+                        <form method="post">
                             <div class="mb-3">
                                 <label for="username1"> Username
                                     <input placeholder="username" id="username1" type="text" name="username" class="form-control" minlength="3" required>
@@ -129,11 +187,11 @@ if(isset($_POST['submit'])){
                                 </label>
                             </div><div class="mb-3">
                                 <label> User Picture
-                                    <input type="file" name="file" class="form-control">
+                                    <input type="file" name="user_image" class="form-control">
                                 </label>
                             </div>
-                            <input type="text" placeholder="is_admin" name="is_admin" hidden value="no">
-                            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                            <input type="text" placeholder="user_role" name="user_role" hidden value="subscriber">
+                            <button type="submit" name="create" class="btn btn-primary">Submit</button>
                         </form>
 
                     </div>
@@ -144,10 +202,12 @@ if(isset($_POST['submit'])){
             </div>
         </div>
         <!--end of register modal-->
+        <?php  ?>
         <div class="drop dropdown bg-dark">
 
             <button class="dropbtn1 btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <?php if($session->is_signed_in()){echo "Welcome "; $user = User::find_by_id($_SESSION['user_id']); echo $user->username; }else{echo "My Account";}   ?>
+                <?php if($session->is_signed_in()){echo "Welcome ";$user = User::find_by_id($_SESSION['user_id']); echo $user->username; }else{echo "My Account";}   ?>
+                <img width="50px" class="admin-user-thumbnail" src="admin/<?php echo $user->image_path_and_placeholder();?>" alt="">
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 

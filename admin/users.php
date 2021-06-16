@@ -1,6 +1,6 @@
-<?php include("includes/header.php"); ?>
+<?php include("includes/admin_header.php"); ?>
 <?php if(!$session->is_signed_in()) {redirect("login.php");} ?>
-<?php $user = User::find_by_id($_SESSION['user_id']); if($user->user_role != "admin") {redirect("index.php");} ?>
+<?php $active_user = User::find_by_id($_SESSION['user_id']); if($active_user->user_role != "admin") {redirect("index.php");} ?>
 
 <?php $users = User::find_all(); ?>
 
@@ -63,9 +63,12 @@
                 <th>ID</th>
                 <th>Photo</th>
                 <th>Username</th>
+                <th>Email</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-               
+                <th>Date Registered</th>
+                <th>User Role</th>
+
             
             </tr>
         
@@ -84,18 +87,19 @@
                 <td><img width="100px" class="admin-user-thumbnail" src="<?php   echo $user->image_path_and_placeholder(); ?>" alt=""> </td>
                 <td><?php echo $user->username; ?>
                 <div class="actions_link">
-            <?php if($user->user_role == "admin" ) : ?>
 
                 <a class="btn btn-danger delete_link"  href="delete_user.php?id=<?php echo $user->id;?>">Delete</a>
                 <a class="btn btn-primary" href="edit_user.php?id=<?php echo $user->id;?>">Edit</a>
                 <a class="btn btn-primary" href="view_user.php?id=<?php echo $user->id;?>">View User</a>
-            <?php endif; ?>
                 </div>
             </td>
-                
+
+                <td><?php echo $user->email; ?></td>
                 <td><?php echo $user->first_name; ?></td>
                 <td><?php echo $user->last_name; ?></td>
-        
+                <td><?php echo $user->date_created; ?></td>
+                <td><?php echo $user->user_role; ?></td>
+
             
             </tr>
             
@@ -125,4 +129,4 @@
         </div>
         <!-- /#page-wrapper -->
 
-  <?php include("includes/footer.php"); ?>
+  <?php include("includes/admin_footer.php"); ?>

@@ -3,7 +3,7 @@
 defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 
 
-define('SITE_ROOT', $_SERVER['DOCUMENT_ROOT'] . DS . 'gallery' );
+define('SITE_ROOT', 'C:' . DS . 'xampp' . DS . 'htdocs' . DS . 'Coolpix' );
 
 define('INCLUDES_PATH' , SITE_ROOT.DS. 'admin' . DS . 'includes' );
 

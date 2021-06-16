@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
-<?php include("includes/header.php"); ?>
+<?php include("includes/admin_header.php"); ?>
 <?php if(!$session->is_signed_in()) {redirect("login.php");} ?>
-
+<?php $user = User::find_by_id($_SESSION['user_id']); ?>
 
 
     <?php  
@@ -98,13 +98,13 @@
     <div class="form-group">
     
     <label for="">Username</label>
-    <input type="text" name="username" class="form-control" value="<?php echo $photo->username; ?>">
+    <input type="text" name="username" class="form-control" value="<?php echo $user->username; ?>">
     
     </div>
  
     <div class="form-group">
     
-        <a class="thumbnail" href="#"><img src="<?php echo $photo->picture_path(); ?>" alt=""></a>
+        <a class="thumbnail" href="#"><img class="thumbnail" src="<?php echo $photo->picture_path(); ?>" alt=""></a>
     </div>
 
     <div class="form-group">
@@ -183,4 +183,4 @@
         </div>
         <!-- /#page-wrapper -->
 
-  <?php include("includes/footer.php"); ?>
+  <?php include("includes/admin_footer.php"); ?>

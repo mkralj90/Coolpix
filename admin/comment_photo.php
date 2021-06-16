@@ -1,4 +1,4 @@
-<?php include("includes/header.php"); ?>
+<?php include("includes/admin_header.php"); ?>
 <?php if(!$session->is_signed_in()) {redirect("login.php");} ?>
 
 
@@ -137,4 +137,4 @@ endforeach;
         </div>
         <!-- /#page-wrapper -->
 
-  <?php include("includes/footer.php"); ?>
+  <?php include("includes/admin_footer.php"); ?>

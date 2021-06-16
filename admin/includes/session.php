@@ -6,6 +6,7 @@
     public $user_id;
     public $message;
     public $count;
+    public $item_per_page = 10;
 
 /* ---------------------------------------------------------------------------- */
     
@@ -18,10 +19,11 @@
     $this->check_message();
     $this->visitor_count();
 
-    } // end of __construct
+    }
+    // end of __construct
+
  /* ---------------------------------------------------------------------------- */
-       
-            
+
 
     public function is_signed_in() {
 

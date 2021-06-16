@@ -70,7 +70,7 @@ $comments = Comment::find_the_comments($photo->id);
                 <hr>
 
                 <!-- Date/Time -->
-                <p><span class="glyphicon glyphicon-time"></span> <?php echo $photo->upload_date; ?></p>
+                <p><span class="glyphicon glyphicon-time"></span> Uploaded on: <?php echo $photo->upload_date; ?></p>
 
                 <hr>
 

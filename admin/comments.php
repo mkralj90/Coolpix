@@ -1,4 +1,4 @@
-<?php include("includes/header.php"); ?>
+<?php include("includes/admin_header.php"); ?>
 <?php if(!$session->is_signed_in()) {redirect("login.php");} ?>
 <?php $user = User::find_by_id($_SESSION['user_id']); if($user->user_role == "subscriber") {redirect("index.php");} ?>
 
@@ -144,4 +144,4 @@ endforeach;
         </div>
         <!-- /#page-wrapper -->
 
-  <?php include("includes/footer.php"); ?>
+  <?php include("includes/admin_footer.php"); ?>

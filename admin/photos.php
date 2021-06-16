@@ -1,4 +1,4 @@
-<?php include("includes/header.php"); ?>
+<?php include("includes/admin_header.php"); ?>
 <?php if(!$session->is_signed_in()) {redirect("login.php");} ?>
 <?php $user = User::find_by_id($_SESSION['user_id']); ?>
 
@@ -14,8 +14,17 @@ $page = !empty($_GET['page']) ? (int)$_GET['page'] : 1 ;
 
 
 
+switch ($item_per_page = $_GET['item_per_page']){
 
-$item_per_page = 10;
+    case"5": $item_per_page = 5; break;
+    case"10": $item_per_page = 10; break;
+    case"15": $item_per_page = 15; break;
+    case"20": $item_per_page = 20; break;
+    default: $item_per_page = 10;
+
+}
+
+
 
 $item_total_count = Photo::count_all();
 
@@ -98,8 +107,7 @@ $photos = Photo::find_by_query($sql);
         </thead>
     
         <tbody>
-        
-        <?php 
+    <?php
 /* ---------------------------------------------------------------------------- */
 
         foreach($photos as $photo) :  ?>
@@ -145,9 +153,8 @@ $photos = Photo::find_by_query($sql);
             </tr>
             
 
-    <?php endforeach; 
-    /* ---------------------------------------------------------------------------- */
-    ?>
+    <?php endforeach; ?>
+
 
         </tbody>
 
@@ -156,61 +163,75 @@ $photos = Photo::find_by_query($sql);
     </table> <!-- end of table -->
     
 <!-- page buttons -->
-  <ul class="pager">
+        <!-- page buttons -->
 
-<?php  
-/* ---------------------------------------------------------------------------- */
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Photos per page
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <a href="photos.php?page=<?php echo $page=1;?>&item_per_page=5">5</a>
 
-if($paginate->page_total() >1){
+                        <li>
+                            <a href="photos.php?page=<?php echo $page=1;?>&item_per_page=10">10</a>
 
-if($paginate->has_next()){
+                        </li>
+                        <li>
+                            <a href="photos.php?page=<?php echo $page=1;?>&item_per_page=15">15</a>
 
-echo  "<li class='next'><a href='photos.php?page={$paginate->next()}'>Next</a></li>";
+                        </li>
+                        <li>
+                            <a href="photos.php?page=<?php echo $page=1;?>&item_per_page=20">20</a>
 
-
-}
-
-
-for($i=1; $i <= $paginate->page_total(); $i++){
-
-if($i == $paginate->current_page){
-
-echo  "<li class='active'><a href='photos.php?page={$i}'>{$i}</a></li>";
-
-
-} else{
-
-
-echo  "<li class=''><a href='photos.php?page={$i}'>{$i}</a></li>";
-
-
-}
-
-}
+                        </li>
+                    </ul>
+                </div>
 
 
-    
+
+                <?php
+                /* ---------------------------------------------------------------------------- */
+
+                if($paginate->page_total() >1){
+
+                    if($paginate->has_next()){
+
+                        echo  "<li class='next page-item'><a class='page-link' href='photos.php?page={$paginate->next()}'>Next</a></li>";
+
+                    }
+
+                    for($i=1; $i <= $paginate->page_total(); $i++){
+
+                        if($i == $paginate->current_page){
+
+                            echo  "<li class='active page-item'><a class='page-link' href='photos.php?page={$i}&item_per_page={$item_per_page}'>{$i}</a></li>";
+
+                        } else{
+
+                            echo  "<li class='page-item'><a class='page-link' href='photos.php?page={$i}&item_per_page={$item_per_page}'>{$i}</a></li>";
+
+                        }
+
+                    }
+
+                    if($paginate->has_previous()){
+
+                        echo  "<li class='previous page-item'><a class='page-link' href='photos.php?page={$paginate->previous()}'>Previous</a></li>";
+
+                    }
+
+                }
 
 
-if($paginate->has_previous()){
+                /* ---------------------------------------------------------------------------- */
 
-  echo  "<li class='previous'><a href='photos.php?page={$paginate->previous()}'>Previous</a></li>";
+                ?>
 
+            </ul>
 
-}
-
-
-}
-
-   
-
-
-   
-/* ---------------------------------------------------------------------------- */
-
-   ?>
-
-</ul>
+        </nav>
     
     </div>
 
@@ -225,4 +246,4 @@ if($paginate->has_previous()){
         </div>
         <!-- /#page-wrapper -->
 
-  <?php include("includes/footer.php"); ?>
+  <?php include("includes/admin_footer.php"); ?>

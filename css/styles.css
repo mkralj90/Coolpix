@@ -1,6 +1,8 @@
 @charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Viaoda+Libre&display=swap");
 body {
   background: #f3e8ee;
+  font-family: Vioda Libre, sans-serif;
 }
 
 * {

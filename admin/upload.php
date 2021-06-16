@@ -1,4 +1,4 @@
-<?php include("includes/header.php"); ?>
+<?php include("includes/admin_header.php"); ?>
 
 <?php if(!$session->is_signed_in()) {redirect("login.php");} ?>
 
@@ -14,7 +14,7 @@ $photo->username = $_POST['username'];
 $photo->description = $_POST['description'];
 $photo->caption = $_POST['caption'];
 $photo->alternate_text = $_POST['alternate_text'];
-$photo->upload_date = date('d-m-y H:i:s');
+$photo->upload_date = date('d-m-Y H:s:i');
 $photo->set_file($_FILES['file']);
 
 
@@ -80,8 +80,7 @@ if($photo->save()){
     
     </div>
     <div class="form-group">
-    <label for="">Username</label>
-    <input  type="text" name="username" id="" class="form-control" value="<?php echo $find_user->username; ?>">
+    <input  type="text" name="username" id="" hidden class="form-control" value="<?php echo $find_user->username; ?>">
     
     </div>
 
@@ -101,9 +100,8 @@ if($photo->save()){
 
     <div class="form-group">
     <label for="">Description</label>
-    <input type="text" name="description" id="" class="form-control">
-    
     </div>
+        <textarea name="description" id="" cols="100" rows="10"></textarea>
 
     <div class="form-group">
     
@@ -135,5 +133,5 @@ if($photo->save()){
         </div>
         <!-- /#page-wrapper -->
 
-  <?php include("includes/footer.php"); ?>
+  <?php include("includes/admin_footer.php"); ?>
 

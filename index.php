@@ -3,16 +3,22 @@
 
 <?php
 /* ---------------------------------------------------------------------------- */
-
 /* PAGINATION */
 
 $page = !empty($_GET['page']) ? (int)$_GET['page'] : 1 ;
 
 
+switch ($_GET['item_per_page']){
+
+    case"5": $item_per_page = 5; break;
+    case"10": $item_per_page = 10; break;
+    case"15": $item_per_page = 15; break;
+    case"20": $item_per_page = 20; break;
+    default: $item_per_page = 10;  break;
+
+}
 
 
-
-$item_per_page = 20;
 
 $item_total_count = Photo::count_all();
 
@@ -27,8 +33,7 @@ $photos = Photo::find_by_query($sql);
 /* ---------------------------------------------------------------------------- */
 ?>
 
-
-
+<?php echo $message;?>
 
    <div class="pictures row">
      
@@ -38,6 +43,7 @@ $photos = Photo::find_by_query($sql);
        <div class="row">
 
        <?php if($session->is_signed_in()) : ?>
+       <?php if(empty($photos)){echo "<div class='alert alert-danger'>There is no content to display</div>";} ?>
        <?php foreach($photos as $photo) : ?>
 
    
@@ -65,8 +71,31 @@ $photos = Photo::find_by_query($sql);
 
        <nav aria-label="Page navigation example">
   <ul class="pagination">
+      <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Photos per page
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <a href="index.php?page=<?php echo $page=1;?>&item_per_page=5">5</a>
 
-  <?php  
+              <li>
+      <a href="index.php?page=<?php echo $page=1;?>&item_per_page=10">10</a>
+
+              </li>
+              <li>
+      <a href="index.php?page=<?php echo $page=1;?>&item_per_page=15">15</a>
+
+              </li>
+              <li>
+      <a href="index.php?page=<?php echo $page=1;?>&item_per_page=20">20</a>
+
+              </li>
+          </ul>
+      </div>
+
+
+
+  <?php
 /* ---------------------------------------------------------------------------- */
 
   if($paginate->page_total() >1){
@@ -81,11 +110,11 @@ $photos = Photo::find_by_query($sql);
 
   if($i == $paginate->current_page){
 
-  echo  "<li class='active page-item'><a class='page-link' href='index.php?page={$i}'>{$i}</a></li>";
+  echo  "<li class='active page-item'><a class='page-link' href='index.php?page={$i}&item_per_page={$item_per_page}'>{$i}</a></li>";
 
   } else{
 
-  echo  "<li class='page-item'><a class='page-link' href='index.php?page={$i}'>{$i}</a></li>";
+  echo  "<li class='page-item'><a class='page-link' href='index.php?page={$i}&item_per_page={$item_per_page}'>{$i}</a></li>";
 
   }
 

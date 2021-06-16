@@ -20,6 +20,28 @@ class DB_Object{
     );
  /* ---------------------------------------------------------------------------- */
 
+    public static function Search()
+    {
+
+        $search = $_POST['search'];
+        if (isset($_POST['search'])) {
+
+            $sql ="SELECT * FROM " . static::$db_table .   " WHERE title LIKE '%$search%' ";
+            $sql .= "OR id LIKE '%$search%' ";
+            $sql .= "OR username LIKE '%$search%' ";
+            $sql .= "OR upload_date LIKE '%$search%' ";
+            $searches = self::find_by_query($sql);
+
+
+
+        }
+
+        return $searches;
+
+    }
+
+
+ /* ---------------------------------------------------------------------------- */
     public static function find_all(){
 
     return static::find_by_query("SELECT * FROM "  . static::$db_table ." ");
